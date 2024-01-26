@@ -1,5 +1,8 @@
 import './App.css';
 
+
+
+
 import PruebaRemake from './componentes/pruebaRemake'
 import Home from './componentes/home';
 import Footer from './componentes/footer';
@@ -13,7 +16,7 @@ function App() {
   return (
     <div>
       <Home nombre={nombre} edad={edad}/>
-      <PruebaRemake/>
+      <PruebaRemake/>      
       <Footer/>
     </div>
   );

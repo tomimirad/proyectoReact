@@ -6,7 +6,11 @@ class PruebaRemake extends cagate {
   constructor(props){
     super(props);
     this.state = {
+      acum: 0,
       mostrar:[],
+      categoriaFiltro:"Procesadores",
+      productosFiltrados:[],
+      productosGanacias:[],
       productos : [
         {
           nombre: "Tarjeta Gráfica GTX 1080",
@@ -47,8 +51,22 @@ class PruebaRemake extends cagate {
   }
 
   resetear =()=>{
-    this.setState({mostrar:[]})
+    this.setState({mostrar:[],productosFiltrados:[]})
   }
+
+  categorias =() =>{
+    const productoCategoria = this.state.productos.filter((producto) => producto.categoria == this.state.categoriaFiltro)
+
+    this.setState({productosFiltrados:productoCategoria})
+  }
+
+   ganancia = () => { 
+      for (let i = 0; i < this.state.productos.length; i++) { 
+      this.state.acum += this.state.productos[i].precio; 
+    }
+    this.setState({acum:productosGanacias})
+  }
+
     
     render(){
       return (
@@ -62,9 +80,27 @@ class PruebaRemake extends cagate {
            <br></br>
          </div>
          ))}
+
+      {this.state.productosFiltrados.map((producto,i)=>(
+         <div>
+           <li key={i}>{producto.nombre}</li>
+           <p key={i}>{producto.categoria}</p>
+           <p key={i}>{producto.precio}</p>
+           <br></br>
+         </div>
+         ))}
+
+    {this.state.productosGanacias.map((producto,i)=>(
+         <div>
+           <h1 key={i}>EL total de ganacias es de: {producto.precio}</h1>
+           <br></br>
+         </div>
+         ))}
         </ul>
         <button onClick={this.listado}>Mostrar</button>
         <button onClick={this.resetear}>Dejar de mostrar</button>
+        <button onClick={this.categorias}>categoria</button>
+        <button onClick={this.ganancia}>Ganacia estimada</button>
       </div>
     );
   }
